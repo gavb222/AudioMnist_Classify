@@ -20,9 +20,7 @@ def train(epochs, lr):
     #load data
     dataset = audiofolder.AudioFolder("D:AudioMNIST/train/AudioMNIST_ByNumber_1s_8k/")
     dataset_test = audiofolder.AudioFolder("D:AudioMNIST/test/AudioMNIST_ByNumber_1s_8k/")
-    #dataset = audiofolder.AudioFolder("D:AudioMNIST/AudioMNIST_Tiny/")
     print("dataset created, ready to train!")
-    #this dataloader gives a tuple of (wav, fs)
     train_dataloader = DataLoader(dataset, batch_size=50, shuffle=True)
     test_dataloader = DataLoader(dataset_test, batch_size = 10, shuffle=False)
     for ep in range(epochs):
@@ -50,10 +48,8 @@ def train(epochs, lr):
         print("Epoch {} finished: {} train loss, {} test loss, {} seconds".format(ep+1,(running_loss_train/len(train_dataloader)),(running_loss_test/len(test_dataloader)),math.floor(time.time()-start_time)))
 
     print("training finished! saving model")
-    torch.save(net.state_dict(),"audionet_1kep.pth")
+    torch.save(net.state_dict(),"audionet.pth")
     print("model saved")
 
-    #run through the model
-    #print some useful knowledge
-
+#train for 1000 epochs with learning rate of .0005
 train(1000,.0005)
